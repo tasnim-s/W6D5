@@ -15,9 +15,7 @@ require 'action_view'
 require 'date'
 
 class Cat < ApplicationRecord
-    def age(dob)
-        now = Time.now.utc.to_date
-        difference = now.year - dob.year
-        difference - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-    end 
+   include ActionView::Helpers::DateHelper
+    validates :color, presence: true 
+
 end
