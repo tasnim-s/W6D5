@@ -16,6 +16,11 @@ require 'date'
 
 class Cat < ApplicationRecord
    include ActionView::Helpers::DateHelper
-    validates :color, presence: true 
+    validates :color, presence: true, inclusion: { in: @colors = %w(@green @yellow @red @blue)}
+    validates :sex, inclusion: { in: ("M", "F")}
+    def age
+        Time.now.year - birth_date.year
+    end
+
 
 end
