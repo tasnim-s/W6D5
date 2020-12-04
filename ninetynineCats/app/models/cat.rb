@@ -15,11 +15,13 @@ require 'action_view'
 require 'date'
 
 class Cat < ApplicationRecord
+    COLORS = %w(green yellow red blue)
    include ActionView::Helpers::DateHelper
-    validates :color, presence: true, inclusion: { in: @colors = %w(@green @yellow @red @blue)}
-    validates :sex, inclusion: { in: ("M", "F")}
+    validates :color, inclusion: { in: COLORS, message: "is not a valid"}
+    validates :sex, inclusion: { in: %w(M F)}
     def age
-        Time.now.year - birth_date.year
+        # Time.now.year - birth_date.year
+        time_ago_in_words(birth_date)
     end
 
 
